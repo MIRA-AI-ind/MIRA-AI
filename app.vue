@@ -182,7 +182,7 @@
                   :class="message.role === 'assistant' ? 'bg-primary' : 'bg-secondary'">
                   <img 
                     v-if="message.role === 'assistant'" 
-                    src="/favicon.png" 
+                    src="/logo.png" 
                     alt="MIRA"
                     class="w-7 h-7 rounded-full object-cover"
                   />
@@ -230,7 +230,7 @@
               <div class="flex items-start gap-6">
                 <div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary">
                   <img 
-                    src="/favicon.png" 
+                    src="/logo.png" 
                     alt="MIRA"
                     class="w-7 h-7 rounded-full object-cover"
                   />
