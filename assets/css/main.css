@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Code block styles */
+pre {
+  position: relative;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  background: #1e1e1e;
+  overflow: visible;
+  min-height: 2.5rem;  /* Ensure space for the button */
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Button hover effect */
+.group:hover button {
+  opacity: 1 !important;
+}
+
+/* Ensure code blocks don't overflow */
+.prose pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Make copy button more visible */
+.group button {
+  z-index: 10;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+/* Typing indicator animation */
+.typing-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: hsl(var(--bc) / 0.6);
+  animation: typingAnimation 1.4s infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typingAnimation {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.3;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+/* Add image styles for AI-generated images */
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+/* Ensure images in not-prose containers display properly */
+.not-prose img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+/* Image container styles */
+.image-container {
+  position: relative;
+  width: 100%;
+  max-width: 768px; /* or your preferred max width */
+  margin: 1rem auto;
+  overflow: hidden;
+}
+
+/* Image prompt styles */
+.image-prompt {
+  font-size: 0.875rem;
+  color: hsl(var(--bc) / 0.6);
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* Add responsive image handling */
+@media (max-width: 640px) {
+  .prose img,
+  .not-prose img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+  }
+} 

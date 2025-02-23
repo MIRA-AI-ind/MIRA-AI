@@ -1,0 +1,20 @@
+{
+  "name": "ai-chat-worker",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npx wrangler build",
+    "deploy": "npx wrangler deploy",
+    "dev": "npx wrangler dev"
+  },
+  "devDependencies": {
+    "wrangler": "^3.109.1"
+  },
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "ai-chat-worker": "file:"
+  }
+}

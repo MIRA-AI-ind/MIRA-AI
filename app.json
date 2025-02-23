@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "a5426aee-3b2c-48cd-91af-34609ab02e0b"
+      }
+    },
+    "android": {
+      "package": "com.r3ap3reditz.chatai"
+    }
+  }
+}

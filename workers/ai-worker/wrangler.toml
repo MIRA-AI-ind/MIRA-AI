@@ -1,0 +1,9 @@
+name = "ai-chat-worker"
+main = "src/worker.ts"
+compatibility_date = "2025-02-12"
+
+[ai]
+binding = "AI"
+
+# Add your account id
+account_id = "b24e2ba64a61f064e0c2e4e02f757593" 

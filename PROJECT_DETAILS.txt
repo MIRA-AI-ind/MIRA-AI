@@ -1,0 +1,196 @@
+MIRA CHAT - INDIA'S FIRST OPEN-SOURCE AI PLATFORM
+===============================================
+
+MISSION STATEMENT
+---------------
+Building India's first comprehensive open-source AI dataset and platform to ensure accurate representation of Indian knowledge, culture, and languages in artificial intelligence.
+
+CORE PHILOSOPHY
+-------------
+- Everything is free and open source
+- No premium/paid features
+- Community-driven development
+- Focus on accessibility and ease of use
+- Preservation of Indian heritage
+- Technological self-reliance
+- Cultural integrity in AI
+
+STRATEGIC OBJECTIVES
+------------------
+1. Indian-Centric AI Development
+   - Accurate historical representation
+   - Cultural preservation
+   - Linguistic diversity support
+   - Unbiased knowledge dissemination
+
+2. Data Sovereignty
+   - Independent AI infrastructure
+   - Local data control
+   - Transparent development
+   - Community ownership
+
+3. Educational Impact
+   - Academic resource creation
+   - Research enablement
+   - Knowledge preservation
+   - Student empowerment
+
+DEVELOPMENT PHASES
+----------------
+Phase 1 (Current): Platform Development
+- Web and mobile interfaces
+- Basic AI integration
+- Community building
+- Infrastructure setup
+
+Phase 2 (Upcoming): Dataset Creation
+- Historical documentation
+- Cultural preservation
+- Language support
+- Academic verification
+- Peer review system
+
+CURRENT FEATURES
+---------------
+Web Platform (v1.0.1):
+✓ Modern responsive UI with dark/light themes
+✓ Code syntax highlighting for 30+ languages
+✓ Markdown rendering & formatting
+✓ Local storage chat history
+✓ Chat export/import (.mira files)
+✓ Message editing and deletion
+✓ End-to-end encrypted sharing
+✓ Image generation via /art command
+✓ Mobile-friendly design
+✓ Auto-save functionality
+✓ Animated transitions
+✓ Copy code functionality
+✓ Chat search & filtering
+
+Mobile App (v1.0.1):
+✓ Native Android & iOS support
+✓ Dark/Light theme support
+✓ Code highlighting & Markdown
+✓ Local chat history
+✓ Secure .mira file handling
+✓ Message management
+✓ Custom user profiles
+✓ Deep linking support
+✓ Enhanced accessibility
+✓ Offline support
+
+AI CAPABILITIES
+-------------
+Current Focus:
+- Integration with existing models
+- Basic Indian language support
+- Cultural context awareness
+- Historical fact verification
+
+Future Enhancements:
+- Indigenous model development
+- Advanced multilingual support
+- Cultural context enrichment
+- Historical accuracy verification
+- Traditional knowledge integration
+
+DATASET DEVELOPMENT
+-----------------
+Priority Areas:
+- Indian History
+- Cultural Heritage
+- Indigenous Languages
+- Scientific Achievements
+- Philosophy & Literature
+- Traditional Knowledge
+- Regional Diversity
+- Social Evolution
+
+Verification Process:
+- Academic peer review
+- Expert consultation
+- Community feedback
+- Source authentication
+- Fact-checking
+- Bias elimination
+
+LANGUAGE SUPPORT
+--------------
+Current:
+- Hindi
+- English
+- Basic regional language support
+
+Planned:
+- Sanskrit
+- Tamil
+- Telugu
+- Bengali
+- Marathi
+- Other regional languages
+- Indigenous dialects
+
+TECHNICAL STACK
+--------------
+Web Platform:
+- Vue 3 + Nuxt 3
+- Tailwind CSS
+- DaisyUI
+- Cloudflare Workers
+- Marked & Highlight.js
+
+Mobile App:
+- React Native (Expo)
+- TypeScript
+- AsyncStorage
+- Expo Libraries
+- Native Components
+
+DEPLOYMENT
+---------
+Web: Cloudflare Pages
+Mobile: Play Store & App Store
+API: Cloudflare Workers
+
+DEVELOPMENT REQUIREMENTS
+-----------------------
+- Node.js >= 18.20.5
+- npm >= 9.0.0
+- Expo CLI (mobile)
+- Android Studio / Xcode
+
+COMMUNITY INVOLVEMENT
+-------------------
+Contributions Welcome In:
+- Dataset curation
+- Language translation
+- Historical documentation
+- Cultural preservation
+- Technical development
+- Content verification
+- Research collaboration
+- Educational resources
+
+EDUCATIONAL INITIATIVES
+---------------------
+- Research collaboration
+- Academic partnerships
+- Student involvement
+- Knowledge sharing
+- Resource development
+- Training programs
+
+IMPACT GOALS
+-----------
+1. Preserve Indian Heritage
+2. Enable AI Sovereignty
+3. Bridge Digital Divide
+4. Support Education
+5. Promote Research
+6. Ensure Accuracy
+7. Foster Innovation
+8. Build Community
+
+All features and data will remain free, open-source, and accessible to everyone forever.
+
+Join us in building India's future in AI - truly Indian, genuinely open, absolutely free. 
