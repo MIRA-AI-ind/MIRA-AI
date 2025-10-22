@@ -13,6 +13,24 @@
   
   body {
     @apply antialiased;
+    background-attachment: fixed;
+  }
+  
+  /* Subtle background pattern */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.03;
+    pointer-events: none;
+    background-image: 
+      radial-gradient(circle at 25px 25px, hsl(var(--bc)) 2%, transparent 0%),
+      radial-gradient(circle at 75px 75px, hsl(var(--bc)) 2%, transparent 0%);
+    background-size: 100px 100px;
+    z-index: -1;
   }
 }
 
@@ -70,11 +88,12 @@ pre {
 
 /* Typing indicator animation */
 .typing-dot {
-  width: 0.5rem;
-  height: 0.5rem;
+  width: 0.6rem;
+  height: 0.6rem;
   border-radius: 9999px;
-  background-color: hsl(var(--bc) / 0.6);
+  background: linear-gradient(135deg, hsl(var(--p)), hsl(var(--s)));
   animation: typingAnimation 1.4s infinite;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .typing-dot:nth-child(2) {
@@ -87,11 +106,11 @@ pre {
 
 @keyframes typingAnimation {
   0%, 60%, 100% {
-    transform: translateY(0);
-    opacity: 0.3;
+    transform: translateY(0) scale(1);
+    opacity: 0.4;
   }
   30% {
-    transform: translateY(-4px);
+    transform: translateY(-6px) scale(1.1);
     opacity: 1;
   }
 }
@@ -100,9 +119,15 @@ pre {
 .prose img {
   max-width: 100%;
   height: auto;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   margin: 1rem 0;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.3), 0 4px 6px -2px rgb(0 0 0 / 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.prose img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 35px -5px rgb(0 0 0 / 0.4), 0 8px 12px -2px rgb(0 0 0 / 0.3);
 }
 
 /* Ensure images in not-prose containers display properly */
@@ -139,6 +164,17 @@ pre {
     width: 100%;
     max-height: 400px;
     object-fit: contain;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .sidebar-item {
+    padding: 0.75rem;
+  }
+  
+  .btn {
+    @apply text-sm;
   }
 }
 
@@ -191,7 +227,18 @@ pre {
 /* Input focus styles */
 .input:focus,
 .textarea:focus {
-  @apply ring-2 ring-primary ring-opacity-50 border-primary;
+  @apply ring-2 ring-primary ring-opacity-50 border-primary shadow-lg;
+  outline: none;
+}
+
+/* Button focus styles for accessibility */
+.btn:focus-visible {
+  @apply ring-2 ring-offset-2 ring-primary outline-none;
+}
+
+/* Link focus styles */
+a:focus-visible {
+  @apply outline-2 outline-offset-2 outline-primary rounded;
 }
 
 /* Sidebar hover effects */
@@ -213,4 +260,32 @@ pre {
   animation: shimmer 2s infinite;
   background: linear-gradient(to right, hsl(var(--b2)) 4%, hsl(var(--b3)) 25%, hsl(var(--b2)) 36%);
   background-size: 1000px 100%;
-} 
+}
+
+/* Page reveal animation */
+@keyframes pageReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-reveal {
+  animation: pageReveal 0.5s ease-out;
+}
+
+/* Stagger children animations */
+.stagger-children > * {
+  animation: pageReveal 0.5s ease-out;
+  animation-fill-mode: both;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.25s; } 

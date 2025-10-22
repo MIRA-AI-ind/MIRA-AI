@@ -72,7 +72,7 @@
     <!-- Sidebar -->
     <div class="w-80 bg-gradient-to-b from-base-200 to-base-100 flex flex-col fixed md:static top-0 bottom-0 -left-80 md:left-0 z-50 transition-all duration-300 border-r border-base-300 shadow-xl"
       :class="{ 'left-0': isSidebarOpen }">
-      <div class="p-5 flex-1 overflow-hidden flex flex-col">
+      <div class="p-5 flex-1 overflow-hidden flex flex-col stagger-children">
         <!-- Mobile Header -->
         <div class="flex justify-between items-center md:hidden mb-6">
           <h1 class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">MIRA</h1>
@@ -83,7 +83,7 @@
 
         <!-- Desktop Brand -->
         <div class="hidden md:flex items-center justify-center mb-6">
-          <h1 class="text-3xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+          <h1 class="text-3xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-pulse">
             MIRA
           </h1>
         </div>
