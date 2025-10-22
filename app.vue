@@ -1,14 +1,19 @@
 <template>
   <!-- Full-screen loading animation -->
-  <div v-if="isInitializing" class="fixed inset-0 bg-base-100 z-[100] flex flex-col items-center justify-center">
+  <div v-if="isInitializing" class="fixed inset-0 bg-gradient-to-br from-base-100 via-base-200 to-base-100 z-[100] flex flex-col items-center justify-center">
     <div class="flex flex-col items-center gap-8">
-      <!-- Logo/Brand -->
-      <div class="text-4xl font-bold text-primary mb-4">MIRA</div>
-      <!-- Animated loading spinner -->
-      <div class="loading loading-spinner loading-lg text-primary"></div>
+      <!-- Logo/Brand with gradient -->
+      <div class="text-5xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-4 animate-pulse">
+        MIRA
+      </div>
+      <!-- Animated loading spinner with glow -->
+      <div class="relative">
+        <div class="loading loading-spinner loading-lg text-primary"></div>
+        <div class="absolute inset-0 loading loading-spinner loading-lg text-primary opacity-30 blur-md"></div>
+      </div>
       <!-- Loading text -->
       <div class="flex flex-col items-center gap-2">
-        <p class="text-base-content text-lg">Initializing MIRA</p>
+        <p class="text-base-content text-lg font-medium">Initializing MIRA</p>
         <p class="text-base-content/60 text-sm animate-pulse">Loading your conversations...</p>
       </div>
     </div>
@@ -25,56 +30,72 @@
     </div>
 
     <!-- Mobile Menu Button -->
-    <div class="fixed top-0 left-0 right-0 md:hidden bg-base-100 border-b border-base-300 h-14 z-50">
-      <button 
-        @click="toggleSidebar"
-        class="btn btn-ghost btn-circle absolute top-2 left-2"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
+    <div class="fixed top-0 left-0 right-0 md:hidden bg-base-100/95 backdrop-blur-lg border-b border-base-300 h-16 z-50 shadow-lg">
+      <div class="flex items-center justify-between h-full px-4">
+        <button 
+          @click="toggleSidebar"
+          class="btn btn-ghost btn-circle"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
 
-      <!-- Mobile Theme Button -->
-      <button 
-        @click="toggleTheme"
-        class="btn btn-ghost btn-circle absolute top-2 right-12 text-base-content"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path v-if="theme === 'dark'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-          <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-        </svg>
-      </button>
+        <!-- Mobile Brand -->
+        <div class="text-lg font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          MIRA
+        </div>
 
-      <!-- Mobile New Chat Button -->
-      <button 
-        @click="startNewChat"
-        class="btn btn-ghost btn-circle absolute top-2 right-2"
-      >
-        <IconPlus class="h-5 w-5" />
-      </button>
+        <div class="flex gap-1">
+          <!-- Mobile Theme Button -->
+          <button 
+            @click="toggleTheme"
+            class="btn btn-ghost btn-circle text-base-content"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path v-if="theme === 'dark'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+          </button>
+
+          <!-- Mobile New Chat Button -->
+          <button 
+            @click="startNewChat"
+            class="btn btn-ghost btn-circle"
+          >
+            <IconPlus class="h-5 w-5" />
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- Sidebar -->
-    <div class="w-72 bg-base-200 flex flex-col fixed md:static top-0 bottom-0 -left-72 md:left-0 z-50 transition-all duration-300"
+    <div class="w-80 bg-gradient-to-b from-base-200 to-base-100 flex flex-col fixed md:static top-0 bottom-0 -left-80 md:left-0 z-50 transition-all duration-300 border-r border-base-300 shadow-xl"
       :class="{ 'left-0': isSidebarOpen }">
-      <div class="p-4 flex-1 overflow-hidden flex flex-col">
+      <div class="p-5 flex-1 overflow-hidden flex flex-col stagger-children">
         <!-- Mobile Header -->
-        <div class="flex justify-between items-center md:hidden mb-4">
-          <h1 class="text-xl font-bold">MIRA</h1>
-          <button @click="toggleSidebar" class="btn btn-ghost btn-sm">
+        <div class="flex justify-between items-center md:hidden mb-6">
+          <h1 class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">MIRA</h1>
+          <button @click="toggleSidebar" class="btn btn-ghost btn-sm btn-circle">
             <IconX class="w-5 h-5" />
           </button>
         </div>
 
+        <!-- Desktop Brand -->
+        <div class="hidden md:flex items-center justify-center mb-6">
+          <h1 class="text-3xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-pulse">
+            MIRA
+          </h1>
+        </div>
+
         <!-- Details Button -->
-        <button @click="showDetails = true" class="btn bg-base-300 hover:bg-base-300/80 mb-4 w-full rounded-lg flex items-center justify-center gap-2 transition-all">
+        <button @click="showDetails = true" class="btn btn-outline btn-primary mb-3 w-full rounded-xl flex items-center justify-center gap-2 transition-all hover:shadow-lg">
           <IconInfo class="w-4 h-4" />
           Details
         </button>
 
         <!-- Settings Button -->
-        <button @click="showSettings = true" class="btn bg-base-300 hover:bg-base-300/80 mb-4 w-full rounded-lg flex items-center justify-center gap-2 transition-all">
+        <button @click="showSettings = true" class="btn btn-outline btn-secondary mb-3 w-full rounded-xl flex items-center justify-center gap-2 transition-all hover:shadow-lg">
           <IconSettings class="w-4 h-4" />
           Settings
         </button>
@@ -82,7 +103,7 @@
         <!-- Import Button (Mobile) -->
         <button 
           @click="$refs.fileInput.click()"
-          class="btn bg-base-300 hover:bg-base-300/80 mb-4 w-full rounded-lg flex items-center justify-center gap-2 transition-all md:hidden relative z-[60]"
+          class="btn btn-outline btn-accent mb-4 w-full rounded-xl flex items-center justify-center gap-2 transition-all md:hidden relative z-[60] hover:shadow-lg"
           title="Import chat"
         >
           <IconImport class="w-4 h-4" />
@@ -90,57 +111,65 @@
         </button>
 
         <!-- Theme and New Chat buttons -->
-        <div class="hidden md:flex gap-2 mb-4">
-          <button @click="startNewChat" class="flex-1 btn btn-primary btn-sm md:btn-md">
+        <div class="hidden md:flex gap-3 mb-6">
+          <button @click="startNewChat" class="flex-1 btn btn-primary rounded-xl shadow-md hover:shadow-lg">
             <IconPlus class="w-4 h-4 mr-2" />
             New Chat
           </button>
           <button 
             @click="$refs.fileInput.click()" 
-            class="btn btn-ghost btn-sm md:btn-md"
+            class="btn btn-ghost btn-circle hover:bg-primary/10"
             title="Import chat"
           >
             <IconImport class="w-5 h-5" />
           </button>
-          <button @click="toggleTheme" class="btn btn-circle btn-ghost btn-sm md:btn-md">
+          <button @click="toggleTheme" class="btn btn-ghost btn-circle hover:bg-secondary/10">
             <IconSun v-if="theme === 'dark'" class="w-5 h-5" />
             <IconMoon v-else class="w-5 h-5" />
           </button>
         </div>
         
         <!-- Chat List -->
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-3 flex-1 overflow-hidden">
           <!-- Search input -->
-          <div class="px-4">
+          <div class="relative">
             <input
               v-model="searchQuery"
               type="search"
               placeholder="Search chats..."
-              class="input input-sm input-bordered w-full"
+              class="input input-bordered w-full rounded-xl pl-10 focus:outline-none focus:ring-2 focus:ring-primary/50"
             />
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-1/2 -translate-y-1/2 text-base-content/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
           </div>
 
           <!-- Chat list -->
-          <div class="divide-y divide-base-300 max-h-[calc(100vh-8rem)] overflow-y-auto">
+          <div class="flex-1 overflow-y-auto space-y-2 pr-2">
             <TransitionGroup name="chat-list">
               <div v-for="(chat, index) in filteredChats" :key="chat.id"
-                class="px-4 py-3 hover:bg-base-300 cursor-pointer transition-all flex items-center justify-between group border-l-4 border-transparent"
-                :class="{ 'bg-base-300 border-l-primary': currentChatId === chat.id }">
+                class="rounded-xl p-3 hover:bg-base-300/50 cursor-pointer transition-all flex items-center justify-between group border-l-4 border-transparent shadow-sm hover:shadow-md sidebar-item"
+                :class="{ 'bg-gradient-to-r from-primary/10 to-transparent border-l-primary shadow-md': currentChatId === chat.id }">
                 <div class="flex-1 min-w-0" @click="selectChat(chat.id)">
-                  <p class="truncate text-sm font-medium">{{ chat.title || 'New Chat' }}</p>
+                  <p class="truncate text-sm font-medium" :class="{ 'text-primary font-semibold': currentChatId === chat.id }">
+                    {{ chat.title || 'New Chat' }}
+                  </p>
+                  <p class="text-xs text-base-content/50 mt-1">
+                    {{ chat.messages.length }} messages
+                  </p>
                 </div>
                 <div class="flex gap-1">
                   <!-- Export Button -->
                   <button 
                     @click.stop="exportChat(chat)"
-                    class="btn btn-ghost btn-sm text-info md:opacity-0 md:group-hover:opacity-100 transition-all"
+                    class="btn btn-ghost btn-xs text-info md:opacity-0 md:group-hover:opacity-100 transition-all hover:scale-110"
                     title="Export chat"
                   >
                     <IconShare class="w-4 h-4" />
                   </button>
                   <button 
                     @click.stop="startRenameChat(chat)"
-                    class="btn btn-ghost btn-sm text-info md:opacity-0 md:group-hover:opacity-100 transition-all"
+                    class="btn btn-ghost btn-xs text-warning md:opacity-0 md:group-hover:opacity-100 transition-all hover:scale-110"
                     title="Rename chat"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -149,7 +178,7 @@
                   </button>
                   <button 
                     @click.stop="deleteChat(chat.id)"
-                    class="btn btn-ghost btn-sm text-error md:opacity-0 md:group-hover:opacity-100 transition-all"
+                    class="btn btn-ghost btn-xs text-error md:opacity-0 md:group-hover:opacity-100 transition-all hover:scale-110"
                     title="Delete chat"
                     :disabled="chats.length === 1"
                   >
@@ -166,29 +195,29 @@
     </div>
 
     <!-- Main Chat Area -->
-    <div class="flex-1 flex flex-col md:pl-0 pt-16 md:pt-0">
+    <div class="flex-1 flex flex-col md:pl-0 pt-16 md:pt-0 bg-gradient-to-b from-base-100 via-base-100 to-base-200">
       <!-- Chat Messages -->
-      <div class="flex-1 overflow-y-auto pb-20 md:pb-0" ref="chatContainer">
+      <div class="flex-1 overflow-y-auto pb-24 md:pb-4" ref="chatContainer">
         <TransitionGroup name="message">
           <div v-for="(message, index) in currentMessages" :key="index"
-            class="border-b border-base-300">
-            <div class="max-w-3xl mx-auto" 
+            class="message-bubble">
+            <div class="max-w-4xl mx-auto px-4" 
               :class="[
                 messageSpacingClass,
-                message.role === 'assistant' ? 'bg-base-200' : ''
+                message.role === 'assistant' ? 'bg-base-200/50' : ''
               ]">
-              <div class="flex items-start gap-6">
-                <div class="w-8 h-8 rounded-full flex items-center justify-center"
-                  :class="message.role === 'assistant' ? 'bg-primary' : 'bg-secondary'">
+              <div class="flex items-start gap-4 md:gap-6">
+                <div class="w-10 h-10 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0"
+                  :class="message.role === 'assistant' ? 'bg-gradient-to-br from-primary to-blue-600' : 'bg-gradient-to-br from-secondary to-purple-600'">
                   <img 
                     v-if="message.role === 'assistant'" 
                     src="/logo.png" 
                     alt="MIRA"
-                    class="w-7 h-7 rounded-full object-cover"
+                    class="w-8 h-8 rounded-xl object-cover"
                   />
-                  <IconUser v-else class="w-5 h-5" />
+                  <IconUser v-else class="w-5 h-5 text-white" />
                 </div>
-                <div class="flex-1 prose" :class="[messageClass, theme === 'dark' ? 'prose-invert' : '']">
+                <div class="flex-1 prose max-w-none" :class="[messageClass, theme === 'dark' ? 'prose-invert' : '']">
                   <div v-if="message.role === 'assistant'" class="relative">
                     <!-- Handle image type messages -->
                     <div v-if="message.type === 'image'" class="not-prose">
@@ -225,17 +254,17 @@
           </div>
 
           <!-- Typing Indicator -->
-          <div v-if="isLoading" key="typing" class="border-b border-base-300">
-            <div class="max-w-3xl mx-auto p-3 md:p-6 bg-base-200">
-              <div class="flex items-start gap-6">
-                <div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary">
+          <div v-if="isLoading" key="typing" class="message-bubble">
+            <div class="max-w-4xl mx-auto px-4 p-3 md:p-6 bg-base-200/50">
+              <div class="flex items-start gap-4 md:gap-6">
+                <div class="w-10 h-10 rounded-2xl flex items-center justify-center bg-gradient-to-br from-primary to-blue-600 shadow-lg animate-pulse">
                   <img 
                     src="/logo.png" 
                     alt="MIRA"
-                    class="w-7 h-7 rounded-full object-cover"
+                    class="w-8 h-8 rounded-xl object-cover"
                   />
                 </div>
-                <div class="flex items-center gap-1">
+                <div class="flex items-center gap-2 mt-2">
                   <span class="typing-dot"></span>
                   <span class="typing-dot"></span>
                   <span class="typing-dot"></span>
@@ -247,13 +276,13 @@
       </div>
 
       <!-- Input Area -->
-      <div class="border-t border-base-300 fixed bottom-0 left-0 right-0 md:static bg-base-100 shadow-lg">
-        <div class="max-w-3xl mx-auto p-4">
+      <div class="border-t border-base-300 fixed bottom-0 left-0 right-0 md:static bg-gradient-to-t from-base-100 to-base-100/95 backdrop-blur-lg shadow-2xl">
+        <div class="max-w-4xl mx-auto p-4 md:p-6">
           <form @submit.prevent="sendMessage" class="relative">
             <textarea
               v-model="newMessage"
-              placeholder="Send a message..."
-              class="w-full textarea textarea-bordered bg-base-200 pr-24 min-h-[3rem] md:min-h-[3.5rem] max-h-32 text-base resize-none"
+              placeholder="Send a message to MIRA..."
+              class="w-full textarea textarea-bordered bg-base-200 pr-28 pl-4 py-3 min-h-[3.5rem] md:min-h-[4rem] max-h-40 text-base resize-none rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/50 shadow-md"
               :disabled="isLoading"
               @keydown.enter.exact.prevent="handleEnterKey"
               @keydown.ctrl.enter.prevent="newMessage += '\n'"
@@ -261,18 +290,18 @@
             ></textarea>
             <button 
               type="submit"
-              class="absolute right-2 top-1/2 -translate-y-1/2 btn btn-primary"
+              class="absolute right-3 top-1/2 -translate-y-1/2 btn btn-primary rounded-xl shadow-lg hover:shadow-xl"
               :disabled="isLoading || !newMessage.trim()"
             >
-              <span class="hidden md:inline">Send</span>
-              <IconSend v-if="!isLoading" class="w-4 h-4" />
-              <IconSpinner v-else class="w-4 h-4 animate-spin" />
+              <span class="hidden md:inline mr-1">Send</span>
+              <IconSend v-if="!isLoading" class="w-5 h-5" />
+              <IconSpinner v-else class="w-5 h-5 animate-spin" />
             </button>
           </form>
-          <div class="mt-1 text-xs text-base-content/60 text-center">
+          <div class="mt-2 text-xs text-base-content/50 text-center">
             {{ isMobile.value 
-              ? 'Press Enter for new line, use Send button to send' 
-              : 'Press Enter to send, Ctrl + Enter for new line' 
+              ? 'Press Enter for new line, tap Send to send' 
+              : 'Press Enter to send • Ctrl + Enter for new line' 
             }}
           </div>
         </div>
@@ -282,21 +311,21 @@
     <!-- Overlay for mobile -->
     <div 
       v-if="isSidebarOpen" 
-      class="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden"
+      class="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 md:hidden transition-opacity duration-300"
       @click="toggleSidebar"
     ></div>
   </div>
 
   <!-- Details Modal -->
   <Transition name="modal-backdrop">
-    <div v-if="showDetails" class="fixed inset-0 bg-black bg-opacity-50 z-[100] flex items-center justify-center p-4">
+    <div v-if="showDetails" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
       <!-- Backdrop click handler -->
       <div class="absolute inset-0" @click="showDetails = false"></div>
       
-      <div class="modal-box max-w-2xl w-full bg-base-100 rounded-lg shadow-xl animate-slideUp relative" :data-theme="theme" @click.stop>
-        <div class="flex justify-between items-center mb-4">
-          <h2 class="text-2xl font-bold text-base-content">MIRA - Project Details</h2>
-          <button @click="showDetails = false" class="btn btn-ghost btn-sm">
+      <div class="modal-box max-w-3xl w-full bg-gradient-to-br from-base-100 to-base-200 rounded-2xl shadow-2xl animate-slideUp relative border border-base-300" :data-theme="theme" @click.stop>
+        <div class="flex justify-between items-center mb-6 pb-4 border-b border-base-300">
+          <h2 class="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">MIRA</h2>
+          <button @click="showDetails = false" class="btn btn-ghost btn-sm btn-circle hover:bg-error/10 hover:text-error">
             <IconX class="w-5 h-5" />
           </button>
         </div>
